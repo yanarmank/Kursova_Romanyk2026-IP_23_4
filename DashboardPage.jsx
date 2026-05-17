@@ -14,13 +14,12 @@ const statIcons = {
 }
 
 const DashboardPage = () => {
-  const { clearNotifications, dashboard, dismissNotification, members } = useCommunity()
-  const activeAuthors = members.slice(0, 4)
+  const { clearNotifications, dashboard, dismissNotification } = useCommunity()
 
   return (
-    <div className="page-shell">
-      {/* Секція ключових маркерів */}
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="page-shell space-y-6">
+      {/* 1. Секція ключових маркерів */}
+      <section className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
         {dashboard.stats.map((stat, index) => (
           <StatCard
             key={stat.id}
@@ -35,46 +34,75 @@ const DashboardPage = () => {
         ))}
       </section>
 
-      {/* Графік виробництва + Контейнерний віджет оптимізації логістики паперу */}
-      <section className="grid gap-6 xl:grid-cols-[1fr_23rem]">
-        <ActivityChart data={dashboard.activity} title="Динаміка випуску продукції (примірники)" />
+      {/* 2. НОВИЙ ГОРИЗОНТАЛЬНИЙ ВІДЖЕТ ЛОГІСТИКИ НА ВСЮ ШИРИНУ СТОРІНКИ */}
+      <section className="w-full">
+        <GlassCard className="p-5 border border-publishing-gold/30 bg-publishing-panel/40 w-full shadow-sm">
+          {/* Верхня частина: Заголовок та Опис в один рядок для десктопів */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 border-b border-publishing-ink/5 pb-3">
+            <div className="flex items-center gap-2 text-publishing-burgundy font-serif font-bold text-base">
+              <Box size={18} className="shrink-0" />
+              <h3>Логістика паперового складу</h3>
+            </div>
+            <p className="text-[11px] text-publishing-muted max-w-2xl leading-relaxed">
+              Моніторинг завантаження складських площ та оптимізація розміщення рулонів офсетного паперу.
+            </p>
+          </div>
+
+          {/* Середня частина: Інформаційні мітки та прогрес-бар */}
+          <div className="mt-4 space-y-2">
+            <div className="flex items-center justify-between text-xs font-medium">
+              <span className="text-publishing-ink font-semibold">Завантажувальний сектор</span>
+              <span className="font-mono font-bold text-publishing-burgundy bg-publishing-burgundy/5 px-2.5 py-0.5 rounded-sm">
+                Зайнято: 78%
+              </span>
+            </div>
+
+            {/* Прогрес-бар на всю довжину */}
+            <div className="w-full h-3.5 rounded-full bg-publishing-ink/10 overflow-hidden relative shadow-inner">
+              <div 
+                className="h-full bg-publishing-gold transition-all duration-500 rounded-full" 
+                style={{ width: '78%' }}
+              />
+            </div>
+          </div>
+
+          {/* Нижня частина: Статуси та вільний об'єм */}
+          <div className="mt-3 flex items-center justify-between text-xs font-mono text-publishing-muted">
+            <div className="flex items-center gap-1.5">
+              <span className="inline-block h-2 w-2 rounded-full bg-publishing-success animate-pulse" />
+              <span>План поставок: <span className="text-publishing-ink font-bold">Норма</span></span>
+            </div>
+            <span className="font-medium text-publishing-ink">
+              Резервний об'єм: <span className="text-publishing-success font-bold">4.2 тонни</span>
+            </span>
+          </div>
+        </GlassCard>
+      </section>
+
+      {/* 3. Графік виробництва + Панель сповіщень */}
+      <section className="grid gap-6 grid-cols-1 xl:grid-cols-[1fr_23rem]">
+        <div className="w-full overflow-x-hidden">
+          <ActivityChart data={dashboard.activity} title="Динаміка випуску продукції (примірники)" />
+        </div>
         
-        <div className="space-y-4">
+        <div className="w-full">
           <NotificationPanel
             notifications={dashboard.notifications}
             onClear={clearNotifications}
             onDismiss={dismissNotification}
           />
-
-          {/* Кастомний віджет: Контейнерне планування завантаження сировини для Nordic-Bud */}
-          <GlassCard className="p-4 border border-publishing-gold/30 bg-publishing-panel/40">
-            <div className="flex items-center gap-2 text-publishing-burgundy font-serif font-bold text-base">
-              <Box size={18} />
-              <h3>Логістика сировини (20-футовий модуль)</h3>
-            </div>
-            <p className="text-[11px] text-publishing-muted mt-1 leading-tight">
-              Оптимізація площі зберігання рулонів офсету для контрактів ТзОВ «Нордік-Буд».
-            </p>
-            <div className="mt-3 border border-publishing-ink/20 h-16 relative bg-publishing-paper overflow-hidden flex items-center justify-center rounded-sm">
-              <div className="absolute left-0 top-0 bottom-0 bg-publishing-gold/25 w-[78%] flex items-center justify-end pr-2 text-[10px] font-bold text-publishing-burgundy">
-                Зайнято: 78%
-              </div>
-              <span className="z-10 font-mono text-[11px] font-bold text-publishing-ink/70">20-Ft Container Layout</span>
-            </div>
-            <p className="text-[10px] text-publishing-muted mt-1.5 text-right">Вільний простір: 4.2 тонни сировини.</p>
-          </GlassCard>
         </div>
       </section>
 
-      {/* Жива технологічна стрічка */}
-      <section className="grid gap-6 xl:grid-cols-[1fr_1fr]">
-        <GlassCard className="p-4">
+      {/* 4. Жива технологічна стрічка цеху та Розподіл за категоріями */}
+      <section className="grid gap-6 grid-cols-1 xl:grid-cols-[1fr_1fr]">
+        <GlassCard className="p-4 w-full">
           <div className="mb-4 flex items-center justify-between border-b border-publishing-ink/5 pb-3">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wider text-publishing-muted">Оперативний облік</p>
-              <h2 className="font-serif text-lg font-bold text-publishing-ink">Технологічна стрічка цеху</h2>
+              <h2 className="font-serif text-base sm:text-lg font-bold text-publishing-ink">Технологічна стрічка цеху</h2>
             </div>
-            <div className="rounded-sm bg-publishing-burgundy/10 p-2 text-publishing-burgundy">
+            <div className="rounded-sm bg-publishing-burgundy/10 p-2 text-publishing-burgundy shrink-0">
               <Sparkles size={16} />
             </div>
           </div>
@@ -83,7 +111,7 @@ const DashboardPage = () => {
             {dashboard.recentEvents.map((event) => (
               <div
                 key={event.id}
-                className="flex flex-col justify-between gap-2 border border-publishing-ink/10 bg-publishing-paper p-3 sm:flex-row sm:items-center rounded-sm"
+                className="flex flex-col gap-2 border border-publishing-ink/10 bg-publishing-paper p-3 sm:flex-row sm:items-center sm:justify-between rounded-sm"
               >
                 <div>
                   <Badge variant={event.type === 'Редагування' ? 'warning' : 'accent'}>
@@ -92,14 +120,13 @@ const DashboardPage = () => {
                   <p className="mt-1 text-xs font-bold text-publishing-ink">{event.title}</p>
                   <p className="text-[10px] text-publishing-muted">{event.time}</p>
                 </div>
-                <p className="text-xs font-mono font-bold text-publishing-burgundy">{event.impact}</p>
+                <p className="text-xs font-mono font-bold text-publishing-burgundy sm:text-right">{event.impact}</p>
               </div>
             ))}
           </div>
         </GlassCard>
 
-        {/* Частка за категоріями */}
-        <GlassCard className="p-4">
+        <GlassCard className="p-4 w-full">
           <h2 className="font-serif text-lg font-bold text-publishing-ink mb-4 border-b border-publishing-ink/5 pb-3">Розподіл потужностей за категоріями</h2>
           <div className="space-y-3">
             {dashboard.moderationStats.map((item) => {
