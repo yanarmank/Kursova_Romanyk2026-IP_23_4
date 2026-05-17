@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,400;0,600;0,700;1,400&family=Inter:wght=400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #1A1A1C;
+  background: #FBFBF9;
+  font-family: 'Inter', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #FBFBF9 0%, #F6F3EB 100%);
+  min-height: 100vh;
+}
+
+@layer components {
+  .editorial-card {
+    @apply rounded-sm border border-[#1A1A1C]/10 bg-[#F6F3EB] shadow-editorial transition-all duration-300;
+  }
+  .page-shell {
+    @apply mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8;
+  }
+  .glass-card {
+    @apply border border-[#1A1A1C]/10 bg-[#F6F3EB]/90 shadow-editorial backdrop-blur-md rounded-sm;
+  }
+}

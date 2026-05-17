@@ -1,0 +1,28 @@
+{
+  "theme": {
+    "compactMode": false,
+    "animatedCards": true,
+    "highContrast": false,
+    "neonIntensity": "Середня"
+  },
+  "roles": [
+    {
+      "name": "Адміністратор",
+      "color": "#6B1D2F",
+      "permissions": ["Повний доступ", "Редагування макетів"]
+    },
+    {
+      "name": "Випусковий редактор",
+      "color": "#B8974D",
+      "permissions": ["Редагування макетів", "Запуск друку"]
+    }
+  ],
+  "channels": [
+    { "name": "Монографія", "category": "Наука", "status": "Активний", "members": 2500 },
+    { "name": "Підручник", "category": "Навчання", "status": "Активний", "members": 5000 }
+  ],
+  "preferences": [
+    { "id": "autoMod", "label": "Автоматичний контроль орфографії макетів", "enabled": true },
+    { "id": "eventPings", "label": "Сповіщення про готовність друкарських форм", "enabled": true }
+  ]
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "academic-monograph",
+    "title": "Академічна монографія (Тверда обкладинка)",
+    "type": "Наукове видання",
+    "bookFormat": "Формат А5",
+    "date": "2026-05-20T10:00:00+03:00",
+    "currentCirculation": 500,
+    "maxCirculation": 2000,
+    "host": "Кафедра автоматизації",
+    "prize": "Папір офсетний 80г/м²",
+    "status": "Доступно для розрахунку",
+    "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "id": "textbook-oil-gas",
+    "title": "Підручник з інженерії нафтогазових свердловин",
+    "type": "Підручник / Посібник",
+    "bookFormat": "Формат В5",
+    "date": "2026-05-25T12:30:00+03:00",
+    "currentCirculation": 1200,
+    "maxCirculation": 3000,
+    "host": "Проф. Р.М. Кондрат",
+    "prize": "Крейдований матовий папір",
+    "status": "У черзі на завантаження",
+    "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "id": "corporate-catalog",
+    "title": "Ілюстрований каталог промислового обладнання",
+    "type": "Каталог / Медіа",
+    "bookFormat": "Формат А4",
+    "date": "2026-06-01T09:00:00+03:00",
+    "currentCirculation": 300,
+    "maxCirculation": 500,
+    "host": "ТзОВ «Нордік-Буд»",
+    "prize": "Повноколірний друк (4+4)",
+    "status": "Узгодження макету",
+    "image": "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=1200&q=80"
+  }
+]
