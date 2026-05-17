@@ -1,4 +1,4 @@
-# Discord Gaming Community Dashboard
+# Typographia
 
 React SPA dashboard for managing a Discord gaming community.
 
